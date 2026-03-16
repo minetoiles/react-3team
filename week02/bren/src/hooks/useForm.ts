@@ -1,7 +1,7 @@
 import { useReducer, useCallback } from "react";
 import type { FormState, FormAction } from "../types/form";
-import { useValidation } from "./useValidation";
-
+// import { useValidation } from "./useValidation"; // 훅으로 import
+import { validateStep } from "./useValidation"; // 순수함수로 리팩토링 후 import
 const initialState: FormState = {
   step: 1,
   formData: { name: "", email: "" },
@@ -25,7 +25,7 @@ function formReducer(state: FormState, action: FormAction): FormState {
 
 export function useForm() {
   const [state, dispatch] = useReducer(formReducer, initialState);
-  const { validateStep } = useValidation();
+  // const { validateStep } = useValidation();
 
   const handleChange = (field: string, value: string) => dispatch({ type: "SET_FIELD", field, value });
   const prevStep = () => dispatch({ type: "PREV_STEP" });
@@ -33,7 +33,7 @@ export function useForm() {
     const error = validateStep(state.step, state.formData);
     if (error) return dispatch({ type: "SET_ERROR", message: error });
     dispatch({ type: "NEXT_STEP" });
-  }, [state.step, state.formData, validateStep]);
+  }, [state.step, state.formData]);
 
   return { state, handleChange, nextStep, prevStep };
 }
