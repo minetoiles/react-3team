@@ -1,5 +1,5 @@
 import ReducerForm from "../form/reducer-form/components/ReducerForm";
-import FormContextProvider from "../form/reducer-form/context/FormContext";
+import { FormContextProvider } from "../form/reducer-form/context/FormContext";
 
 export default function FormPage() {
   return (
