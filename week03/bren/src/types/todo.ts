@@ -1,4 +1,5 @@
 export type Priority = "low" | "medium" | "high";
+export type TodoFilter = "all" | "active" | "completed";
 
 export interface Todo {
   id: number;
