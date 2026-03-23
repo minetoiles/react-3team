@@ -9,7 +9,7 @@ const getNavClassName = ({ isActive }: { isActive: boolean }) =>
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-slate-50/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-[#999] backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <div>
           <h1 className="text-lg font-bold text-slate-900">Week3 React Study</h1>
