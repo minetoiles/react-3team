@@ -48,12 +48,6 @@ export default function ReduxTodoPage() {
 
   return (
     <div className="space-y-6">
-      {/* 페이지 제목 */}
-      <div>
-        <h2 className="text-3xl font-bold text-slate-900">Reducer 투두 앱</h2>
-        <p className="mt-2 text-sm text-slate-500">Redux Toolkit으로 상태를 관리하는 투두 예제</p>
-      </div>
-
       {/* 상단 요약 카드 */}
       <TodoSummary totalCount={totalCount} activeCount={activeCount} completedCount={completedCount} />
 
