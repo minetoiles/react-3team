@@ -1,33 +1,47 @@
-import { useState } from "react";
+import { useState } from "react"
+import { validate } from "../../../utils/validateForm"
 
 export default function useForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  })
 
-  const handleChangeName = (e: any) => {
-    setName(e.target.value);
-  };
+  const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleChangeEmail = (e: any) => {
-    setEmail(e.target.value);
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    setValues(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (!name || !email) {
-      alert("모든 값을 입력해주세요.");
-      return;
-    }
+    const validationErrors = validate(values)
+    setErrors(validationErrors)
 
-    alert(`Name: ${name}, Email: ${email}`);
-  };
+    if (Object.keys(validationErrors).length > 0) return
+
+    setIsSubmitting(true)
+
+    setTimeout(() => {
+      alert(JSON.stringify(values))
+      setIsSubmitting(false)
+    }, 1000)
+  }
 
   return {
-    name,
-    email,
-    handleChangeName,
-    handleChangeEmail,
+    values,
+    errors,
+    isSubmitting,
+    handleChange,
     handleSubmit
-  };
+  }
 }
